@@ -1,15 +1,25 @@
 import './Hero.css';``
 import  Carousel  from "react-material-ui-carousel";
 import { Paper } from "@mui/material";
+import { useEffect, useState } from 'react';
+
+
 
 const Hero = ({movies}) => {
+
+    const [movie, setMovie] = useState(movies);
+
+    useEffect(() => {
+        setMovie(movies);
+    }, [movies])
+
     return(
         <div  className="movie-carousel-container">
-            <Carousel>
+            <Carousel infiniteLoop={true} autoPlay={true} cycleNavigation={true}>
                 {
-                    movies?.map((movie, index) => {
+                    movie?.map((movie) => {
                         return(
-                            <Paper key={index}>
+                            <Paper key={movie.id}>
                                 <div className="movie-card-container">
                                     <div className="movie-card" style={{"--img": `url(${movie.backdrops[0]})`}}>
                                         <div className="movie-detail">
